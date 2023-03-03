@@ -101,7 +101,29 @@ public class MSButton
     public void mousePressed () 
     {
         clicked = true;
-        //your code here
+        if (mouseButton == RIGHT){
+          if (flagged == true){
+             flagged = false;
+             clicked = false;
+          }
+           else 
+             flagged = true;
+        }
+        else if (mines.contains(this))
+          displayLosingMessage();
+          
+         else if (countMines(myRow, myCol) > 0)
+           setLabel(countMines(myRow, myCol));
+         
+         else{
+          for(int r = myRow-1;r<=myRow+1;r++){
+              for(int c = myCol-1; c<=myCol+1;c++){
+                if(isValid(r,c) && (buttons[r][c]).clicked == false)
+                  (buttons[r][c]).mousePressed () ;
+              }
+          }
+         }
+         
     }
     public void draw () 
     {    
